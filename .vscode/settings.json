@@ -1,0 +1,11 @@
+{
+  "files.autoSave": "off", // for eslint.autoFixOnSave
+  "editor.formatOnSave": true,
+  // see https://code.visualstudio.com/docs/languages/typescript#_organize-imports
+  "editor.codeActionsOnSave": { "source.organizeImports": true },
+  "eslint.autoFixOnSave": true,
+  "eslint.validate": [
+    { "language": "typescript", "autoFix": true },
+    { "language": "typescriptreact", "autoFix": true }
+  ]
+}
