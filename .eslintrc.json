@@ -23,5 +23,12 @@
       { "allowExpressions": true } // for `(async () => { ... })()`
     ],
     "react/prop-types": "off"
-  }
+  },
+  "overrides": [
+    // see https://github.com/typescript-eslint/typescript-eslint/issues/906
+    {
+      "files": ["*.js", "*.jsx"],
+      "rules": { "@typescript-eslint/explicit-function-return-type": "off" }
+    }
+  ]
 }
