@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es2017",
-    // see https://github.com/Microsoft/TypeScript/issues/16675
+    "target": "es6",
+    // see https://github.com/microsoft/TypeScript/issues/16675
     "module": "esnext",
     "jsx": "react",
     "sourceMap": true,

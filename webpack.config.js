@@ -13,7 +13,8 @@ module.exports = (env, { mode }) => {
       rules: [
         {
           test: /\.tsx?$/,
-          use: "ts-loader"
+          use: "ts-loader",
+          exclude: /node_modules/
         },
         {
           test: /\.css$/,
@@ -32,7 +33,7 @@ module.exports = (env, { mode }) => {
     optimization: {
       minimizer: [new TerserPlugin(), new OptimizeCssAssetsPlugin()]
     },
-    devtool: dev ? "inline-source-map" : "none",
+    devtool: dev ? "inline-source-map" : false,
     devServer: {
       contentBase: "./dist",
       overlay: true,
