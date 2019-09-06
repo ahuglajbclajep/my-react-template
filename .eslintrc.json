@@ -17,10 +17,6 @@
     // see https://reactjs.org/docs/hooks-rules
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "@typescript-eslint/explicit-function-return-type": [
-      "warn",
-      { "allowExpressions": true } // for `(async () => { ... })()`
-    ],
     "react/prop-types": "off"
   }
 }
