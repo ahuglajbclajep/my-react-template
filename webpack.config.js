@@ -13,7 +13,7 @@ module.exports = (env, { mode }) => {
     module: {
       rules: [
         {
-          test: /\.tsx?$/,
+          test: /\.[tj]sx?$/,
           use: "ts-loader",
           exclude: /node_modules/
         },
@@ -30,7 +30,7 @@ module.exports = (env, { mode }) => {
         title: process.env.npm_package_name
       })
     ],
-    resolve: { extensions: [".ts", ".tsx", ".js"] },
+    resolve: { extensions: [".ts", ".tsx", ".js", ".jsx"] },
     optimization: {
       minimizer: [new TerserPlugin(), new OptimizeCssAssetsPlugin()]
     },

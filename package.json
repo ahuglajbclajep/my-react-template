@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --open",
     "build": "webpack -p",
-    "lint": "eslint --fix src/**/*.ts{,x}"
+    "lint": "eslint --fix src/**/*.[tj]s{,x}"
   },
   "dependencies": {
     "react": "^16.9.0",
