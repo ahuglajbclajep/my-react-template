@@ -3,10 +3,11 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin"); // from webpack
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
-/** @type {(env: typeof process.env, argv: { mode: string }) => import("webpack").Configuration} */
+/** @type {(env: typeof process.env, argv: { mode?: string }) => import("webpack").Configuration} */
 module.exports = (env, { mode }) => {
-  const dev = mode === "development";
+  const dev = mode !== "production";
   return {
+    // see https://github.com/webpack/webpack-dev-server/issues/1327
     mode: "development",
     entry: "./src/index.tsx",
     module: {
