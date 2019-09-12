@@ -1,7 +1,8 @@
 {
   "parser": "@typescript-eslint/parser",
-  "parserOptions": { "project": "tsconfig.json" },
-  "env": { "browser": true, "es6": true, "worker": true },
+  // see https://github.com/typescript-eslint/typescript-eslint/issues/864
+  "parserOptions": { "project": "tsconfig.json", "createDefaultProgram": true },
+  "env": { "browser": true, "es6": true, "worker": true }, // for allowJs
   "settings": { "react": { "version": "detect" } },
   "plugins": ["@typescript-eslint", "react-hooks"],
   "extends": [
