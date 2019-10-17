@@ -12,5 +12,7 @@
     // "noImplicitAny": false, // for checkJs
     "moduleResolution": "node",
     "esModuleInterop": true
-  }
+  },
+  // see https://github.com/typescript-eslint/typescript-eslint/issues/890
+  "include": ["src/**/*"]
 }
