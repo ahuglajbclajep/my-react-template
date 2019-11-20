@@ -1,15 +1,22 @@
 {
+  /* eslint */
   "files.autoSave": "off", // for eslint.autoFixOnSave
-  "editor.formatOnSave": true,
-  // see https://code.visualstudio.com/docs/languages/typescript#_organize-imports
-  "editor.codeActionsOnSave": { "source.organizeImports": true },
-  // see https://github.com/microsoft/TypeScript/issues/19566
-  // "typescript.locale": "ja",
   "eslint.autoFixOnSave": true,
   "eslint.validate": [
     "javascript",
     "javascriptreact",
     { "language": "typescript", "autoFix": true },
     { "language": "typescriptreact", "autoFix": true }
-  ]
+  ],
+
+  /* format */
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.eol": "\n",
+  // see https://code.visualstudio.com/docs/languages/typescript#_organize-imports
+  "editor.codeActionsOnSave": { "source.organizeImports": true }
+
+  /* other */
+  // see https://github.com/microsoft/TypeScript/issues/19566
+  // "typescript.locale": "ja"
 }
