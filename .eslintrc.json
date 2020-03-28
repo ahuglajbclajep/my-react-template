@@ -3,21 +3,19 @@
   "parserOptions": { "project": "tsconfig.json" },
   "env": { "browser": true, "es6": true, "worker": true }, // for allowJs
   "settings": { "react": { "version": "detect" } },
-  "plugins": ["@typescript-eslint", "react-hooks"],
+  "plugins": ["@typescript-eslint"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
     "prettier",
     "prettier/@typescript-eslint",
     "prettier/react"
   ],
   "rules": {
-    // see https://reactjs.org/docs/hooks-rules
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
     "react/prop-types": "off"
   },
   "overrides": [
