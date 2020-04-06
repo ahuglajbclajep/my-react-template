@@ -6,8 +6,7 @@ My React + TypeScript template for [VS Code](https://code.visualstudio.com).
 
 ```sh
 $ yarn install
-$ code .
-$ yarn start
+$ code . & yarn start
 ```
 
 ## Migrating to preact
@@ -26,7 +25,7 @@ $ yarn add preact
 
 [tsconfig.json](tsconfig.json)
 
-```json
+```diff
 {
   "compilerOptions": {
     "jsx": "react",
@@ -37,7 +36,7 @@ $ yarn add preact
 
 [.eslintrc.json](.eslintrc.json)
 
-```json
+```diff
 {
 - "settings": { "react": { "version": "detect" } },
 + "settings": { "react": { "version": "preact", "pragma": "h" } },
