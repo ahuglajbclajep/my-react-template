@@ -14,7 +14,7 @@ module.exports = (env, { mode }) => {
       rules: [
         {
           test: /\.[tj]sx?$/,
-          use: "ts-loader",
+          loader: "ts-loader",
           exclude: /node_modules/,
         },
         {
