@@ -1,6 +1,6 @@
 # my-react-template
 
-My React + TypeScript template for [VS Code](https://code.visualstudio.com).
+My simple React + TypeScript template for [VS Code](https://code.visualstudio.com).
 
 [vscode-eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint), [vscode-stylelint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint) and [prettier-vscode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) are required.
 
@@ -110,7 +110,86 @@ module.exports = {
 </details>
 
 <details>
-<summary>Migrating to preact</summary><br>
+<summary>With Workbox</summary><br>
+
+See also:
+
+- <https://developers.google.com/web/tools/workbox/guides/generate-service-worker/webpack>
+- <https://developers.google.com/web/tools/workbox/guides/codelabs/webpack#optional-config>
+
+```sh
+$ yarn add -D workbox-webpack-plugin
+```
+
+[webpack.config.js](webpack.config.js)
+
+```diff
++ const { GenerateSW } = require("workbox-webpack-plugin");
+
+{
+  plugins: [
+    new MiniCssExtractPlugin(),
++   new GenerateSW({
++     clientsClaim: true,
++     skipWaiting: true,
++     inlineWorkboxRuntime: true,
++     sourcemap: dev
++   }),
+  ],
+}
+```
+
+[src/index.ejs](src/index.ejs)
+
+```diff
+<html>
+  <body>
+    <div id="root"></div>
++   <!-- prettier-ignore -->
++   <script>
++     addEventListener("load",_=>navigator.serviceWorker.register("./service-worker.js"))
++   </script>
+  </body>
+</html>
+```
+
+</details>
+
+<details>
+<summary>With pre-commit hook</summary><br>
+
+See also:
+
+- <https://github.com/typicode/husky/tree/v4.2.5#install>
+- <https://github.com/okonet/lint-staged/tree/v10.1.6#examples>
+
+```sh
+$ yarn add -D husky lint-staged
+```
+
+[package.json](package.json)
+
+```diff
+{
++ "husky": {
++   "hooks": {
++     "pre-commit": "lint-staged"
++   }
++ },
++ "lint-staged": {
++   "src/**": "stylelint --fix",
++   "src/**/*.[tj]s{,x}": "eslint --fix",
++   "*.{[tj]s{,x},css,json,md}": "prettier --write"
++ }
+}
+```
+
+If the outputs conflict, you can run tasks serially with `lint-staged -p false`.
+
+</details>
+
+<details>
+<summary>Migrating to Preact</summary><br>
 
 See also:
 
