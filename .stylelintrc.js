@@ -5,5 +5,11 @@ module.exports = {
     "stylelint-config-recess-order",
     "stylelint-config-prettier",
   ],
-  // ignoreFiles: ["**/*.[tj]s{,x}"], // for function-name-case
+  rules: {
+    // `stylelint-disable` comments do not work in JSX, so set them in here instead
+    "function-name-case": ["lower", { ignoreFunctions: [] }],
+    "value-keyword-case": ["lower", { ignoreKeywords: [] }],
+  },
+  // for vscode-stylelint
+  ignoreFiles: ["node_modules/**", "dist"],
 };

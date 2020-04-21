@@ -1,8 +1,8 @@
 {
   /* format */
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.eol": "\n",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
     // see https://code.visualstudio.com/docs/languages/typescript#_organize-imports
     "source.organizeImports": true,
