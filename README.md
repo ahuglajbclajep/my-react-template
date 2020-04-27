@@ -230,11 +230,34 @@ If the outputs conflict, you can run tasks serially with `lint-staged -p false`.
 </details>
 
 <details>
-<summary>Migrating to Preact</summary><br>
+<summary>With gh-pages</summary><br>
+
+```sh
+$ yarn add -D gh-pages
+```
+
+[package.json](package.json)
+
+```diff
+{
+  "scripts": {
+-   "build": "webpack -p",
++   "build": "rm -rf && webpack -p",
++   "deploy": "npm run build && gh-pages -d dist",
+  }
+}
+```
+
+You must use [rimraf](https://github.com/isaacs/rimraf) instead of `rm -rf` when running in cmd, and [run-s](https://github.com/mysticatea/npm-run-all/blob/master/docs/run-s.md) instead of `&&` when running in powershell (before 7).
+
+</details>
+
+<details>
+<summary>With Preact</summary><br>
 
 See also:
 
-- <https://preactjs.com/guide/v10/differences-to-react>
+- <https://preactjs.com/guide/v10/differences-to-react#jsx-constructor>
 - <https://github.com/microsoft/TypeScript/issues/20469>
 - <https://github.com/yannickcr/eslint-plugin-react/issues/1955>
 - <https://github.com/preactjs/preact-cli/blob/v3.0.0-rc.9/.eslintrc#L20>
@@ -277,5 +300,70 @@ import { h, render } from "preact";
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 render(<h1>Hello, Preact!</h1>, document.getElementById("root")!);
 ```
+
+</details>
+
+<details>
+<summary>Switching to Preact</summary><br>
+
+See also:
+
+- <https://preactjs.com/guide/v10/getting-started#aliasing-react-to-preact>
+- <https://www.typescriptlang.org/docs/handbook/module-resolution.html#path-mapping>
+- <https://github.com/preactjs/preact/issues/2150>
+
+```sh
+$ yarn remove {,@types/}react{,-dom}
+$ yarn add preact
+```
+
+[webpack.config.js](webpack.config.js)
+
+```diff
+{
+- resolve: { extensions: [".ts", ".tsx", ".js", ".jsx"] },
++ resolve: {
++   extensions: [".ts", ".tsx", ".js", ".jsx"],
++   alias: {
++     react: "preact/compat",
++     "react-dom": "preact/compat",
++   },
++ },
+}
+```
+
+[tsconfig.json](tsconfig.json)
+
+```diff
+{
+  "compilerOptions": {
++   "baseUrl": ".",
++   "paths": {
++     "react": ["node_modules/preact/compat"],
++     "react-dom": ["node_modules/preact/compat"]
++   }
+  }
+}
+```
+
+[.eslintrc.json](.eslintrc.json)
+
+```diff
+{
+- "settings": { "react": { "version": "detect" } },
++ "settings": { "react": { "version": "preact" } },
+}
+```
+
+[src/declares.d.ts](src/declares.d.ts)
+
+```ts
+// define the missing types yourself
+declare namespace React {
+  type ChangeEvent<T extends EventTarget> = JSX.TargetedEvent<T>;
+}
+```
+
+Type definitions with `type` can not be overridden, so type annotations must be added for things like `e.target`.
 
 </details>
