@@ -16,6 +16,7 @@ $ code . & yarn start
 
 See also:
 
+- <https://styled-components.com/docs/api#typescript>
 - <https://styled-components.com/docs/tooling#typescript-plugin>
 - <https://github.com/Igorbek/typescript-plugin-styled-components>
 - <https://styled-components.com/docs/tooling#stylelint>
@@ -26,6 +27,8 @@ See also:
 $ yarn add styled-components
 $ yarn add -D @types/styled-components typescript-plugin-styled-components stylelint-config-styled-components
 ```
+
+Since styled-components uses [stylis](https://github.com/thysultan/stylis.js), there is no need to configure [sass-loader](https://github.com/webpack-contrib/sass-loader), [Autoprefixer](https://github.com/postcss/autoprefixer) and [CSS Modules](https://github.com/css-modules/css-modules) (`css-loader?modules`).
 
 If you do not import CSS files, you do not need `css-loader`, `mini-css-extract-plugin` and `optimize-css-assets-webpack-plugin`.
 
@@ -60,8 +63,25 @@ module.exports = {
     "stylelint-config-standard",
 +   "stylelint-config-styled-components",
   ],
-+ rules: { "declaration-empty-line-before": null },
+  rules: {
++   "declaration-empty-line-before": null,
+  },
 }
+```
+
+[src/index.tsx](src/index.tsx)
+
+```tsx
+import React from "react";
+import ReactDOM from "react-dom";
+import styled from "styled-components";
+
+const Title = styled.h1`
+  font-size: 1.5em;
+  text-align: center;
+`;
+
+ReactDOM.render(<Title>Hello, React!</Title>, document.getElementById("root"));
 ```
 
 </details>
@@ -81,6 +101,8 @@ See also:
 $ yarn add linaria@beta
 $ echo '.linaria-cache' >> .gitignore
 ```
+
+Since linaria uses [stylis](https://github.com/thysultan/stylis.js) (as well as styled-components), there is no need to configure [sass-loader](https://github.com/webpack-contrib/sass-loader), [Autoprefixer](https://github.com/postcss/autoprefixer) and [CSS Modules](https://github.com/css-modules/css-modules).
 
 [webpack.config.js](webpack.config.js)
 
@@ -103,8 +125,27 @@ $ echo '.linaria-cache' >> .gitignore
 
 ```diff
 module.exports = {
-+ rules: { "declaration-empty-line-before": null },
+  rules: {
++   "declaration-empty-line-before": null,
+  },
+- ignoreFiles: ["node_modules/**", "dist"],
++ ignoreFiles: ["node_modules/**", "dist", ".linaria-cache"],
 }
+```
+
+[src/index.tsx](src/index.tsx)
+
+```tsx
+import { styled } from "linaria/react";
+import React from "react";
+import ReactDOM from "react-dom";
+
+const Title = styled.h1`
+  font-size: 1.5em;
+  text-align: center;
+`;
+
+ReactDOM.render(<Title>Hello, React!</Title>, document.getElementById("root"));
 ```
 
 </details>
@@ -232,7 +273,6 @@ $ yarn add preact
 
 ```tsx
 import { h, render } from "preact";
-import "./style.css";
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 render(<h1>Hello, Preact!</h1>, document.getElementById("root")!);
