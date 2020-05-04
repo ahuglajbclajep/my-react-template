@@ -12,6 +12,43 @@ $ code . & yarn start
 ## Advanced settings
 
 <details>
+<summary>With transpileOnly option</summary><br>
+
+See also:
+
+- <https://github.com/TypeStrong/ts-loader/tree/v7.0.2#transpileonly>
+- <https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#using-tsconfigjson>
+
+[webpack.config.js](webpack.config.js)
+
+```diff
+{
+  module: {
+    rules: [
+      {
+        test: /\.[tj]sx?$/,
+-       loader: "ts-loader",
++       loader: "ts-loader?transpileOnly",
+        exclude: /node_modules/,
+      },
+    ],
+  },
+}
+```
+
+[package.json](package.json)
+
+```diff
+{
+  "scripts": {
++   "lint:type": "tsc -p . --noEmit",
+  }
+}
+```
+
+</details>
+
+<details>
 <summary>With styled-components</summary><br>
 
 See also:
@@ -146,6 +183,61 @@ const Title = styled.h1`
 `;
 
 ReactDOM.render(<Title>Hello, React!</Title>, document.getElementById("root"));
+```
+
+</details>
+
+<details>
+<summary>With comlink-loader</summary><br>
+
+See also:
+
+- <https://github.com/GoogleChromeLabs/comlink-loader/tree/2.0.0#singleton-mode>
+- <https://github.com/GoogleChromeLabs/comlink-loader/issues/1>
+- <https://github.com/webpack-contrib/worker-loader/issues/142>
+- <https://github.com/GoogleChromeLabs/comlink-loader/blob/2.0.0/src/index.js#L38>
+
+```sh
+$ yarn add -D comlink-loader
+```
+
+[webpack.config.js](webpack.config.js)
+
+```diff
+{
++ output: { globalObject: "self" },
+  module: {
+    rules: [
++     {
++       test: /\.?worker\.[tj]s$/,
++       loader: "comlink-loader?singleton&name=[name].js",
++     },
+      {
+        test: /\.[tj]sx?$/,
+        loader: "ts-loader",
+        exclude: /node_modules/,
+      },
+    ],
+  },
+}
+```
+
+[src/worker.ts](src/worker.ts)
+
+```ts
+/* eslint-disable @typescript-eslint/require-await */
+
+export async function greet(subject: string): Promise<string> {
+  return `Hello, ${subject}!`;
+}
+```
+
+[src/index.tsx](src/index.tsx)
+
+```diff
++ import { greet } from "./worker";
+
++ (async () => console.log(await greet("dog")))();
 ```
 
 </details>
