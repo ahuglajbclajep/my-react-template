@@ -26,5 +26,5 @@
     }
   ],
   // for vscode-eslint
-  "ignorePatterns": ["dist", "webpack.config.js"]
+  "ignorePatterns": ["dist", "*.config.js"]
 }

@@ -9,7 +9,7 @@ module.exports = (env, { mode }) => {
   return {
     // see https://github.com/webpack/webpack-dev-server/issues/1327
     mode: "development",
-    entry: "./src/index.tsx",
+    entry: "./src/index",
     module: {
       rules: [
         {
