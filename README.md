@@ -49,6 +49,90 @@ See also:
 </details>
 
 <details>
+<summary>With babel</summary><br>
+
+See also:
+
+- <https://devblogs.microsoft.com/typescript/typescript-and-babel-7>
+- <https://github.com/Microsoft/TypeScript-Babel-Starter>
+- <https://github.com/babel/babel-loader>
+- <https://github.com/babel/babel/issues/10008>
+- <https://babeljs.io/docs/en/babel-preset-env>
+- <https://github.com/zloirock/core-js/tree/v3.6.5#babelpreset-env>
+- <https://babeljs.io/docs/en/babel-plugin-transform-runtime>
+- <https://babeljs.io/docs/en/babel-plugin-transform-typescript#caveats>
+
+```sh
+$ yarn remove ts-loader
+$ yarn add -D babel-loader @babel/core @babel/preset-{typescript,react,env} @babel/plugin-transform-runtime
+$ yarn add core-js @babel/runtime
+```
+
+[webpack.config.js](webpack.config.js)
+
+```diff
+{
+  module: {
+    rules: [
+      {
+        test: /\.[tj]sx?$/,
+-       loader: "ts-loader",
++       loader: "babel-loader",
+        exclude: /node_modules/,
+      },
+    ],
+  },
+}
+```
+
+[tsconfig.json](tsconfig.json)
+
+```diff
+{
+  "compilerOptions": {
+-   "target": "es6",
++   "target": "esnext",
+    "outDir": "dist", // for allowJs
++   "noEmit": true,
++   "isolatedModules": true,
+  }
+}
+```
+
+babel.config.js
+
+```js
+module.exports = {
+  presets: [
+    [
+      "@babel/env",
+      { useBuiltIns: "usage", corejs: require("core-js/package.json").version },
+    ],
+    "@babel/react",
+    "@babel/typescript",
+  ],
+  plugins: [
+    [
+      "@babel/transform-runtime",
+      { version: require("@babel/runtime/package.json").version },
+    ],
+  ],
+};
+```
+
+[package.json](package.json)
+
+```diff
+{
+  "scripts": {
++   "lint:type": "tsc",
+  }
+}
+```
+
+</details>
+
+<details>
 <summary>With styled-components</summary><br>
 
 See also:
@@ -222,7 +306,7 @@ $ yarn add -D comlink-loader
 }
 ```
 
-[src/worker.ts](src/worker.ts)
+src/worker.ts
 
 ```ts
 /* eslint-disable @typescript-eslint/require-await */
@@ -429,6 +513,7 @@ $ yarn add preact
 ```diff
 {
   "compilerOptions": {
+    "moduleResolution": "node",
 +   "baseUrl": ".",
 +   "paths": {
 +     "react": ["node_modules/preact/compat"],
