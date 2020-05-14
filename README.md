@@ -49,24 +49,27 @@ See also:
 </details>
 
 <details>
-<summary>With babel</summary><br>
+<summary>With polyfills via Babel</summary><br>
 
 See also:
 
 - <https://devblogs.microsoft.com/typescript/typescript-and-babel-7>
 - <https://github.com/Microsoft/TypeScript-Babel-Starter>
-- <https://github.com/babel/babel-loader>
-- <https://github.com/babel/babel/issues/10008>
-- <https://babeljs.io/docs/en/babel-preset-env>
-- <https://github.com/zloirock/core-js/tree/v3.6.5#babelpreset-env>
-- <https://babeljs.io/docs/en/babel-plugin-transform-runtime>
+- <https://github.com/babel/babel-loader/tree/v8.1.0#usage>
 - <https://babeljs.io/docs/en/babel-plugin-transform-typescript#caveats>
+- <https://github.com/babel/babel/issues/10008>
+- <https://babeljs.io/docs/en/babel-preset-env#usebuiltins>
+- <https://github.com/zloirock/core-js/tree/v3.6.5#babelpreset-env>
+- <https://babeljs.io/docs/en/babel-plugin-transform-runtime#corejs>
 
 ```sh
 $ yarn remove ts-loader
 $ yarn add -D babel-loader @babel/core @babel/preset-{typescript,react,env} @babel/plugin-transform-runtime
 $ yarn add core-js @babel/runtime
 ```
+
+The `@babel/preset-typescript` is not enough to convert all TypeScript syntaxes.
+If you want to use the `enum` syntax or stage 3 syntaxes, please set up additional plugins.
 
 [webpack.config.js](webpack.config.js)
 
@@ -128,6 +131,22 @@ module.exports = {
 +   "lint:type": "tsc",
   }
 }
+```
+
+</details>
+
+<details>
+<summary>With HMR and Fast Refresh (experimental)</summary><br>
+
+See also:
+
+- <https://webpack.js.org/guides/hot-module-replacement>
+- <https://github.com/facebook/create-react-app/blob/v3.4.1/packages/react-scripts/config/webpack.config.js>
+- <https://github.com/facebook/react/issues/16604>
+- <https://github.com/pmmmwh/react-refresh-webpack-plugin>
+
+```sh
+$ yarn add -D style-loader react-refresh @pmmmwh/react-refresh-webpack-plugin
 ```
 
 </details>
