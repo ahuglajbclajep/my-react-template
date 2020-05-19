@@ -140,6 +140,7 @@ module.exports = {
 
 See also:
 
+- "With polyfills via Babel" section
 - <https://webpack.js.org/guides/hot-module-replacement>
 - <https://github.com/facebook/create-react-app/blob/v3.4.1/packages/react-scripts/config/webpack.config.js>
 - <https://github.com/facebook/react/issues/16604>
@@ -229,13 +230,16 @@ ReactDOM.render(<Title>Hello, React!</Title>, document.getElementById("root"));
 <details>
 <summary>With linaria</summary><br>
 
+The following example requires a Babel configuration.
+
 See also:
 
+- "With polyfills via Babel" section
 - <https://github.com/callstack/linaria/issues/420>
-- <https://github.com/callstack/linaria/blob/v1.4.0-beta.6/docs/BUNDLERS_INTEGRATION.md>
+- <https://github.com/callstack/linaria/blob/v1.4.0-beta.10/docs/BUNDLERS_INTEGRATION.md>
 - <https://github.com/callstack/linaria/issues/197>
-- <https://github.com/callstack/linaria/blob/v1.4.0-beta.6/docs/LINTING.md>
-- <https://github.com/callstack/linaria/issues/558>
+- <https://github.com/callstack/linaria/blob/v1.4.0-beta.10/docs/LINTING.md>
+- <https://github.com/callstack/linaria/issues/614>
 
 ```sh
 $ yarn add linaria@beta
@@ -252,8 +256,8 @@ Since linaria uses [stylis](https://github.com/thysultan/stylis.js) (as well as 
     rules: [
       {
         test: /\.[tj]sx?$/,
--       loader: "ts-loader",
-+       use: [`linaria/loader?sourceMap=${dev}`, "ts-loader"],
+-       loader: "babel-loader",
++       use: ["babel-loader", `linaria/loader?sourceMap=${dev}`],
         exclude: /node_modules/,
       },
     ],
