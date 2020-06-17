@@ -49,6 +49,27 @@ See also:
 </details>
 
 <details>
+<summary>With tslib</summary><br>
+
+See also:
+
+- <https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#support-for-external-helpers-library-tslib>
+- <https://github.com/microsoft/tslib/tree/2.0.0#installing>
+
+[tsconfig.json](tsconfig.json)
+
+```diff
+{
+  "compilerOptions": {
+    "outDir": "dist", // for allowJs
++   "importHelpers": true,
+  }
+}
+```
+
+</details>
+
+<details>
 <summary>With polyfills via Babel</summary><br>
 
 See also:
