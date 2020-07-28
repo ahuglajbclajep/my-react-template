@@ -19,7 +19,7 @@ module.exports = (env, { mode }) => {
         },
         {
           test: /\.css$/,
-          use: [MiniCssExtractPlugin.loader, `css-loader?sourceMap=${dev}`],
+          use: [MiniCssExtractPlugin.loader, "css-loader"],
         },
       ],
     },
