@@ -3,11 +3,14 @@
   "editor.formatOnSave": true,
   "files.eol": "\n",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // see https://code.visualstudio.com/updates/v1_31#_fix-all-source-actions,
+  // https://code.visualstudio.com/updates/v1_44#_explicit-ordering-for-code-actions-on-save
+  // and https://code.visualstudio.com/updates/v1_46#_add-all-missing-imports-source-action
   "editor.codeActionsOnSave": {
-    // see https://code.visualstudio.com/docs/languages/typescript#_organize-imports
+    "source.addMissingImports": true,
     "source.organizeImports": true,
-    "source.fixAll.eslint": true,
-    "source.fixAll.stylelint": true
+    "source.fixAll.stylelint": true,
+    "source.fixAll.eslint": true
   }
 
   /* other */
