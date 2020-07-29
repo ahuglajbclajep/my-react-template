@@ -450,6 +450,69 @@ If the outputs conflict, you can run tasks serially with `lint-staged -p false`.
 </details>
 
 <details>
+<summary>With GitHub Actions and Renovate</summary><br>
+
+See also:
+
+- <https://docs.github.com/en/actions/language-and-framework-guides/using-nodejs-with-github-actions>
+- <https://docs.renovatebot.com/install-github-app/>
+- <https://github.com/ahuglajbclajep/renovate-config>
+- <https://docs.renovatebot.com/configuration-options/#includeforks>
+
+.github/workflows/lint.yml
+
+```yaml
+name: lint
+on: push
+jobs:
+  lint:
+    strategy:
+      fail-fast: false
+      matrix:
+        npm-lint-script: [ts, css, format]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - uses: actions/cache@v2
+        with:
+          path: ~/.cache/yarn
+          key: yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: yarn-
+      - run: yarn install --frozen-lockfile
+      - run: yarn lint:${{ matrix.npm-lint-script }}
+```
+
+If you want to use the `npm`, change it as follows:
+
+```diff
+     - uses: actions/cache@v2
+       with:
+-         path: ~/.cache/yarn
+-         key: yarn-${{ hashFiles('**/yarn.lock') }}
+-         restore-keys: yarn-
+-     - run: yarn install --frozen-lockfile
+-     - run: yarn lint:${{ matrix.npm-lint-script }}
++         path: ~/.npm
++         key: npm-${{ hashFiles('**/package-lock.json') }}
++         restore-keys: npm-
++     - run: npm ci
++     - run: npm run lint:${{ matrix.npm-lint-script }}
+```
+
+.github/renovate.json
+
+```json
+{
+  "extends": ["github>ahuglajbclajep/renovate-config"]
+}
+```
+
+</details>
+
+<details>
 <summary>With gh-pages</summary><br>
 
 ```sh
