@@ -24,10 +24,7 @@ module.exports = (env, { mode }) => {
       ],
     },
     plugins: [
-      new HtmlWebpackPlugin({
-        template: "src/index.ejs",
-        title: process.env.npm_package_name,
-      }),
+      new HtmlWebpackPlugin({ title: process.env.npm_package_name }),
       new MiniCssExtractPlugin(),
     ],
     resolve: { extensions: [".ts", ".tsx", ".js", ".jsx"] },
