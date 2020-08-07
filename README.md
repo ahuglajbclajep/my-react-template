@@ -9,6 +9,8 @@ $ yarn install
 $ code . & yarn start
 ```
 
+If you are running in cmd or powershell, use [cross-env](https://github.com/kentcdodds/cross-env) for `NODE_ENV`.
+
 ## Advanced settings
 
 <details>
@@ -54,7 +56,11 @@ See also:
 See also:
 
 - <https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#support-for-external-helpers-library-tslib>
-- <https://github.com/microsoft/tslib/tree/2.0.0#installing>
+- <https://github.com/microsoft/tslib/tree/2.0.1#installing>
+
+```sh
+$ yarn add tslib
+```
 
 [tsconfig.json](tsconfig.json)
 
@@ -524,14 +530,14 @@ $ yarn add -D gh-pages
 ```diff
 {
   "scripts": {
--   "build": "webpack -p",
-+   "build": "rm -rf && webpack -p",
+-   "build": "NODE_ENV=production webpack -p",
++   "build": "rm -rf && NODE_ENV=production webpack -p",
 +   "deploy": "npm run build && gh-pages -d dist",
   }
 }
 ```
 
-You must use [rimraf](https://github.com/isaacs/rimraf) instead of `rm -rf` when running in cmd, and [run-s](https://github.com/mysticatea/npm-run-all/blob/master/docs/run-s.md) instead of `&&` when running in powershell (before 7).
+You need to use [rimraf](https://github.com/isaacs/rimraf) instead of `rm -rf` to run in cmd, and you also need to use [run-s](https://github.com/mysticatea/npm-run-all/blob/master/docs/run-s.md) instead of `&&` to run in powershell (before 7).
 
 </details>
 
