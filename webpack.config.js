@@ -25,7 +25,7 @@ module.exports = (env, { mode }) => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        title: process.env.npm_package_name,
+        title: require("./package.json").name,
         scriptLoading: "defer",
       }),
       new MiniCssExtractPlugin(),
