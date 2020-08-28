@@ -428,7 +428,7 @@ $ yarn add -D workbox-webpack-plugin
 See also:
 
 - <https://github.com/typicode/husky/tree/v4.2.5#install>
-- <https://github.com/okonet/lint-staged/tree/v10.1.6#examples>
+- <https://github.com/okonet/lint-staged/tree/v10.2.13#examples>
 
 ```sh
 $ yarn add -D husky lint-staged
@@ -446,7 +446,7 @@ $ yarn add -D husky lint-staged
 + "lint-staged": {
 +   "src/**": "stylelint --fix",
 +   "src/**/*.[tj]s{,x}": "eslint --fix",
-+   "*.{[tj]s{,x},css,json,md}": "prettier --write"
++   "*": "prettier -wu"
 + }
 }
 ```
@@ -546,10 +546,9 @@ You need to use [rimraf](https://github.com/isaacs/rimraf) instead of `rm -rf` t
 
 See also:
 
-- <https://preactjs.com/guide/v10/differences-to-react#jsx-constructor>
-- <https://github.com/microsoft/TypeScript/issues/20469>
+- <https://preactjs.com/guide/v10/differences-to-react>
 - <https://github.com/yannickcr/eslint-plugin-react/issues/1955>
-- <https://github.com/preactjs/preact-cli/blob/v3.0.0-rc.9/.eslintrc#L20>
+- <https://github.com/preactjs/preact-cli/blob/v3.0.1/.eslintrc#L20>
 
 ```sh
 $ yarn remove {,@types/}react{,-dom}
@@ -563,6 +562,7 @@ $ yarn add preact
   "compilerOptions": {
     "jsx": "react",
 +   "jsxFactory": "h",
++   "jsxFragmentFactory": "Fragment"
   }
 }
 ```
