@@ -189,6 +189,82 @@ $ yarn add -D style-loader react-refresh @pmmmwh/react-refresh-webpack-plugin
 </details>
 
 <details>
+<summary>With prerender-loader</summary><br>
+
+See also:
+
+- <https://github.com/GoogleChromeLabs/prerender-loader/issues/7>
+- <https://github.com/GoogleChromeLabs/prerender-loader/issues/40>
+- <https://github.com/GoogleChromeLabs/prerender-loader/issues/6>
+
+```sh
+$ yarn add -D prerender-loader
+$ mv src/index.ejs src/index.html
+```
+
+[webpack.config.js](webpack.config.js)
+
+```diff
+    plugins: [
+      new HtmlWebpackPlugin({
+-       title: require("./package.json").name,
++       template: "!!prerender-loader?string!./src/index.html",
+        scriptLoading: "defer",
+      }),
+    ]
+```
+
+src/App.tsx
+
+```tsx
+import { useCallback, useState } from "react";
+
+const App: React.FC = () => {
+  const [count, setCount] = useState(0);
+  const onclick = useCallback(() => setCount((c) => c + 1), []);
+  return (
+    <>
+      <h1>{count}</h1>
+      <button onClick={onclick}>add</button>
+    </>
+  );
+};
+
+export default App;
+```
+
+[src/index.tsx](src/index.tsx)
+
+```tsx
+import { hydrate } from "react-dom";
+import App from "./App";
+import "./style.css";
+
+hydrate(<App />, document.getElementById("root"));
+```
+
+src/entry.tsx
+
+```tsx
+import { renderToString } from "react-dom/server";
+import App from "./App";
+
+export default (): string => renderToString(<App />);
+```
+
+[src/index.html](src/index.ejs)
+
+```diff
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+-   <div id="root"></div>
++   <div id="root">{{prerender:./src/entry.tsx}}</div>
+  </body>
+```
+
+</details>
+
+<details>
 <summary>With styled-components</summary><br>
 
 See also:
