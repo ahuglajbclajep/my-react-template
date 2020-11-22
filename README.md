@@ -18,8 +18,7 @@ If you are running in cmd or powershell, use [cross-env](https://github.com/kent
 
 See also:
 
-- <https://github.com/TypeStrong/ts-loader/tree/v7.0.2#transpileonly>
-- <https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#using-tsconfigjson>
+- <https://github.com/TypeStrong/ts-loader/tree/v8.0.11#transpileonly>
 
 [webpack.config.js](webpack.config.js)
 
@@ -56,7 +55,7 @@ See also:
 See also:
 
 - <https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#support-for-external-helpers-library-tslib>
-- <https://github.com/microsoft/tslib/tree/2.0.1#installing>
+- <https://github.com/microsoft/tslib/tree/2.0.3#usage>
 
 ```sh
 $ yarn add tslib
@@ -80,14 +79,17 @@ $ yarn add tslib
 
 See also:
 
-- <https://devblogs.microsoft.com/typescript/typescript-and-babel-7>
-- <https://github.com/Microsoft/TypeScript-Babel-Starter>
-- <https://github.com/babel/babel-loader/tree/v8.1.0#usage>
+- <https://github.com/babel/babel-loader/tree/v8.2.1#usage>
 - <https://babeljs.io/docs/en/babel-plugin-transform-typescript#caveats>
+- <https://babeljs.io/docs/en/plugins/#plugin-ordering>
+- <https://babeljs.io/docs/en/babel-preset-env#bugfixes>
+- <https://github.com/zloirock/core-js/tree/v3.7.0#babelpreset-env>
 - <https://github.com/babel/babel/issues/10008>
-- <https://babeljs.io/docs/en/babel-preset-env#usebuiltins>
-- <https://github.com/zloirock/core-js/tree/v3.6.5#babelpreset-env>
-- <https://babeljs.io/docs/en/babel-plugin-transform-runtime#corejs>
+- <https://github.com/babel/babel-loader/tree/v8.2.1#babel-is-injecting-helpers-into-each-file-and-bloating-my-code>
+- <https://github.com/browserslist/browserslist/tree/4.14.7#configuring-for-different-environments>
+- <https://create-react-app.dev/docs/supported-browsers-features/#configuring-supported-browsers>
+- <https://github.com/Microsoft/TypeScript-Babel-Starter>
+- <https://github.com/babel/babel/issues/8121>
 
 ```sh
 $ yarn remove ts-loader
@@ -96,7 +98,9 @@ $ yarn add core-js @babel/runtime
 ```
 
 The `@babel/preset-typescript` is not enough to convert all TypeScript syntaxes.
-If you want to use the `enum` syntax or stage 3 syntaxes, please set up additional plugins.
+If you want to use the `enum` syntax or stage 3 syntaxes, please set up additional plugins like [babel-plugin-const-enum](https://github.com/dosentmatter/babel-plugin-const-enum).
+
+If `@babel/preset-env` generates code that depends on `regenerator-runtime`, you can suppress this with [babel-plugin-transform-async-to-promises](https://github.com/rpetrich/babel-plugin-transform-async-to-promises), which is also used in [microbundle](https://github.com/developit/microbundle).
 
 [webpack.config.js](webpack.config.js)
 
@@ -136,7 +140,11 @@ module.exports = {
   presets: [
     [
       "@babel/env",
-      { useBuiltIns: "usage", corejs: require("core-js/package.json").version },
+      {
+        useBuiltIns: "usage",
+        bugfixes: true,
+        corejs: require("core-js/package.json").version,
+      },
     ],
     "@babel/react",
     "@babel/typescript",
@@ -156,7 +164,8 @@ module.exports = {
 {
   "scripts": {
 +   "lint:type": "tsc",
-  }
+  },
++ browserslist: "> 0.2%, not dead, not op_mini all, not ie 11"
 }
 ```
 
@@ -169,7 +178,7 @@ See also:
 
 - "With polyfills via Babel" section in this README
 - <https://webpack.js.org/guides/hot-module-replacement>
-- <https://github.com/facebook/create-react-app/blob/v3.4.1/packages/react-scripts/config/webpack.config.js>
+- <https://github.com/facebook/create-react-app/blob/v4.0.0/packages/react-scripts/config/webpack.config.js>
 - <https://github.com/facebook/react/issues/16604>
 - <https://github.com/pmmmwh/react-refresh-webpack-plugin>
 
@@ -186,7 +195,7 @@ See also:
 
 - <https://styled-components.com/docs/api#typescript>
 - <https://styled-components.com/docs/tooling#typescript-plugin>
-- <https://github.com/Igorbek/typescript-plugin-styled-components>
+- <https://github.com/Igorbek/typescript-plugin-styled-components/tree/1.4.4#ts-loader>
 - <https://styled-components.com/docs/tooling#stylelint>
 - <https://github.com/stylelint/stylelint/issues/4481>
 - <https://github.com/styled-components/stylelint-processor-styled-components/issues/278>
@@ -257,19 +266,15 @@ ReactDOM.render(<Title>Hello, React!</Title>, document.getElementById("root"));
 <details>
 <summary>With linaria</summary><br>
 
-The following example requires a Babel configuration.
-
 See also:
 
 - "With polyfills via Babel" section in this README
-- <https://github.com/callstack/linaria/issues/420>
-- <https://github.com/callstack/linaria/blob/v1.4.0-beta.10/docs/BUNDLERS_INTEGRATION.md>
-- <https://github.com/callstack/linaria/issues/197>
-- <https://github.com/callstack/linaria/blob/v1.4.0-beta.10/docs/LINTING.md>
+- <https://github.com/callstack/linaria/blob/v2.0.2/docs/BUNDLERS_INTEGRATION.md>
+- <https://github.com/callstack/linaria/blob/v2.0.2/docs/LINTING.md>
 - <https://github.com/callstack/linaria/issues/614>
 
 ```sh
-$ yarn add linaria@beta
+$ yarn add linaria
 $ echo '.linaria-cache' >> .gitignore
 ```
 
@@ -284,7 +289,7 @@ Since linaria uses [stylis](https://github.com/thysultan/stylis.js) (as well as 
       {
         test: /\.[tj]sx?$/,
 -       loader: "babel-loader",
-+       use: ["babel-loader", `linaria/loader?sourceMap=${dev}`],
++       use: ["babel-loader", `@linaria/webpack-loader?sourceMap=${dev}`],
         exclude: /node_modules/,
       },
     ],
@@ -382,7 +387,9 @@ export async function greet(subject: string): Promise<string> {
 See also:
 
 - <https://developers.google.com/web/tools/workbox/guides/generate-service-worker/webpack>
-- <https://developers.google.com/web/tools/workbox/guides/codelabs/webpack#optional-config>
+- <https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-webpack-plugin.GenerateSW>
+- <https://github.com/GoogleChrome/workbox/issues/2064>
+- <https://github.com/GoogleChrome/workbox/issues/2493>
 
 ```sh
 $ yarn add -D workbox-webpack-plugin
@@ -427,12 +434,15 @@ $ yarn add -D workbox-webpack-plugin
 
 See also:
 
-- <https://github.com/typicode/husky/tree/v4.2.5#install>
-- <https://github.com/okonet/lint-staged/tree/v10.2.13#examples>
+- <https://github.com/typicode/husky/tree/v4.3.0#install>
+- <https://github.com/typicode/husky/blob/v5.0.4/LICENSE>
+- <https://github.com/okonet/lint-staged/tree/v10.5.1#running-multiple-commands-in-a-sequence>
 
 ```sh
-$ yarn add -D husky lint-staged
+$ yarn add -D husky@4 lint-staged
 ```
+
+If you do not like the LICENSE after `husky@5`, you can also use [lefthook](https://github.com/Arkweid/lefthook) instead.
 
 [package.json](package.json)
 
@@ -460,35 +470,47 @@ If the outputs conflict, you can run tasks serially with `lint-staged -p false`.
 
 See also:
 
-- <https://docs.github.com/en/actions/language-and-framework-guides/using-nodejs-with-github-actions>
+- <https://docs.github.com/en/free-pro-team@latest/actions/guides/building-and-testing-nodejs>
+- <https://github.community/t/github-actions-branch-conditional/16057>
 - <https://docs.renovatebot.com/install-github-app/>
-- <https://github.com/ahuglajbclajep/renovate-config>
-- <https://docs.renovatebot.com/configuration-options/#includeforks>
+- <https://github.com/ahuglajbclajep/renovate-config#usage>
+- <https://github.com/renovatebot/renovate/issues/5411>
 
-.github/workflows/lint.yml
+.github/workflows/main.yml
 
 ```yaml
-name: lint
+name: main
 on: push
 jobs:
-  lint:
+  npm-script:
     strategy:
       fail-fast: false
       matrix:
-        npm-lint-script: [ts, css, format]
+        script: [build, "lint:format", "lint:ts", "lint:css"]
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 14
       - uses: actions/cache@v2
         with:
           path: ~/.cache/yarn
           key: yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: yarn-
       - run: yarn install --frozen-lockfile
-      - run: yarn lint:${{ matrix.npm-lint-script }}
+      - run: yarn ${{ matrix.script }}
+      - if: >
+          matrix.script == 'build' &&
+          github.event_name == 'push' &&
+          github.ref == 'refs/heads/master' &&
+          github.event.head_commit.author.name != 'renovate[bot]' &&
+          !contains(github.event.head_commit.message, '[deploy skip]')
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
 ```
 
 If you want to use the `npm`, change it as follows:
@@ -500,18 +522,19 @@ If you want to use the `npm`, change it as follows:
 -         key: yarn-${{ hashFiles('**/yarn.lock') }}
 -         restore-keys: yarn-
 -     - run: yarn install --frozen-lockfile
--     - run: yarn lint:${{ matrix.npm-lint-script }}
+-     - run: yarn ${{ matrix.script }}
 +         path: ~/.npm
 +         key: npm-${{ hashFiles('**/package-lock.json') }}
 +         restore-keys: npm-
 +     - run: npm ci
-+     - run: npm run lint:${{ matrix.npm-lint-script }}
++     - run: npm run ${{ matrix.script }}
 ```
 
 .github/renovate.json
 
 ```json
 {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["github>ahuglajbclajep/renovate-config"]
 }
 ```
@@ -546,9 +569,10 @@ You need to use [rimraf](https://github.com/isaacs/rimraf) instead of `rm -rf` t
 
 See also:
 
-- <https://preactjs.com/guide/v10/differences-to-react>
+- <https://preactjs.com/guide/v10/typescript>
 - <https://github.com/yannickcr/eslint-plugin-react/issues/1955>
-- <https://github.com/preactjs/preact-cli/blob/v3.0.1/.eslintrc#L20>
+- <https://github.com/preactjs/preact-cli/blob/v3.0.3/.eslintrc#L20>
+- <https://preactjs.com/guide/v10/differences-to-react/#raw-html-attributeproperty-names>
 
 ```sh
 $ yarn remove {,@types/}react{,-dom}
