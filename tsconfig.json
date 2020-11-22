@@ -5,7 +5,7 @@
     "module": "esnext",
     "allowJs": true,
     // "checkJs": true,
-    "jsx": "react",
+    "jsx": "react-jsx", // or "react-jsxdev"
     "sourceMap": true,
     "outDir": "dist", // for allowJs
     "strict": true,

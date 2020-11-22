@@ -146,7 +146,7 @@ module.exports = {
         corejs: require("core-js/package.json").version,
       },
     ],
-    "@babel/react",
+    ["@babel/preset-react", { runtime: "automatic" }],
     "@babel/typescript",
   ],
   plugins: [
@@ -249,7 +249,6 @@ module.exports = {
 [src/index.tsx](src/index.tsx)
 
 ```tsx
-import React from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
 
@@ -313,7 +312,6 @@ module.exports = {
 
 ```tsx
 import { styled } from "linaria/react";
-import React from "react";
 import ReactDOM from "react-dom";
 
 const Title = styled.h1`
@@ -570,6 +568,7 @@ You need to use [rimraf](https://github.com/isaacs/rimraf) instead of `rm -rf` t
 See also:
 
 - <https://preactjs.com/guide/v10/typescript>
+- <https://github.com/preactjs/preact/releases/tag/10.5.0>
 - <https://github.com/yannickcr/eslint-plugin-react/issues/1955>
 - <https://github.com/preactjs/preact-cli/blob/v3.0.3/.eslintrc#L20>
 - <https://preactjs.com/guide/v10/differences-to-react/#raw-html-attributeproperty-names>
@@ -584,9 +583,8 @@ $ yarn add preact
 ```diff
 {
   "compilerOptions": {
-    "jsx": "react",
-+   "jsxFactory": "h",
-+   "jsxFragmentFactory": "Fragment"
+    "jsx": "react-jsx", // or "react-jsxdev"
++   "jsxImportSource": "preact",
   }
 }
 ```
@@ -596,11 +594,11 @@ $ yarn add preact
 ```diff
 {
 - "settings": { "react": { "version": "detect" } },
-+ "settings": { "react": { "version": "preact", "pragma": "h" } },
++ "settings": { "react": { "version": "preact" } },
 
   "rules": {
-    "react/prop-types": "off",
-+   "react/no-unknown-property": [2, { "ignore": ["class"] }]
+    "react/react-in-jsx-scope": "off"
++   "react/no-unknown-property": ["error", { "ignore": ["class"] }]
   }
 }
 ```
@@ -608,7 +606,7 @@ $ yarn add preact
 [src/index.tsx](src/index.tsx)
 
 ```tsx
-import { h, render } from "preact";
+import { render } from "preact";
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 render(<h1>Hello, Preact!</h1>, document.getElementById("root")!);
@@ -651,10 +649,9 @@ $ yarn add preact
 {
   "compilerOptions": {
     "moduleResolution": "node",
-+   "baseUrl": ".",
 +   "paths": {
-+     "react": ["node_modules/preact/compat"],
-+     "react-dom": ["node_modules/preact/compat"]
++     "react": ["./node_modules/preact/compat"],
++     "react-dom": ["./node_modules/preact/compat"]
 +   }
   }
 }
