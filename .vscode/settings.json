@@ -12,6 +12,7 @@
     "source.fixAll.stylelint": true,
     "source.fixAll.eslint": true
   },
+  // see https://github.com/prettier/prettier-vscode/issues/1598
   "editor.defaultFormatter": "esbenp.prettier-vscode",
 
   /* language specific */

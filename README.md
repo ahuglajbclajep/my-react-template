@@ -193,6 +193,7 @@ $ yarn add -D style-loader react-refresh @pmmmwh/react-refresh-webpack-plugin
 
 See also:
 
+- <https://v4.webpack.js.org/concepts/loaders/#inline>
 - <https://github.com/GoogleChromeLabs/prerender-loader/issues/7>
 - <https://github.com/GoogleChromeLabs/prerender-loader/issues/40>
 - <https://github.com/GoogleChromeLabs/prerender-loader/issues/6>

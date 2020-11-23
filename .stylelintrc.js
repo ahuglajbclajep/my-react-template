@@ -1,4 +1,5 @@
 // `.eslintrc.json` allows comments, but `.stylelintrc.json` does not
+// see https://github.com/stylelint/stylelint/issues/4521
 module.exports = {
   extends: [
     "stylelint-config-standard",
