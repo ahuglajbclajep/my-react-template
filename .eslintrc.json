@@ -11,10 +11,7 @@
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    // see https://prettier.io/docs/en/integrating-with-linters.html
-    "prettier",
-    "prettier/@typescript-eslint",
-    "prettier/react"
+    "prettier"
   ],
   "rules": {
     "react/prop-types": "off",
