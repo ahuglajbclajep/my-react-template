@@ -1,9 +1,8 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const TerserPlugin = require("terser-webpack-plugin"); // from webpack
-const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
-/** @type {import("webpack").ConfigurationFactory} */
+/** @type {(env: object, argv: { mode?: string }) => import("webpack").Configuration} */
 module.exports = (env, { mode }) => {
   const dev = mode !== "production";
   return {
@@ -24,17 +23,13 @@ module.exports = (env, { mode }) => {
       ],
     },
     plugins: [
-      new HtmlWebpackPlugin({
-        title: require("./package.json").name,
-        scriptLoading: "defer",
-      }),
+      // see https://github.com/jantimon/html-webpack-plugin/issues/1387
+      new HtmlWebpackPlugin({ template: "src/index.ejs" }),
       new MiniCssExtractPlugin(),
     ],
     resolve: { extensions: [".ts", ".tsx", ".js", ".jsx"] },
-    optimization: {
-      minimizer: [new TerserPlugin(), new OptimizeCssAssetsPlugin()],
-    },
-    devtool: dev ? "inline-source-map" : false,
+    optimization: { minimizer: ["...", new CssMinimizerPlugin()] },
+    devtool: dev ? "eval-source-map" : false,
     devServer: {
       // host: "0.0.0.0", // for debugging on mobile devices
       historyApiFallback: true,

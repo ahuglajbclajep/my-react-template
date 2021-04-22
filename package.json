@@ -4,8 +4,8 @@
   "description": "",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server --open",
-    "build": "NODE_ENV=production webpack -p",
+    "start": "webpack serve --open",
+    "build": "webpack --node-env production --mode production",
     "lint:format": "prettier -cu --ignore-path .gitignore .",
     "lint:ts": "eslint 'src/**/*.[tj]s{,x}'",
     "lint:css": "stylelint -f verbose 'src/**'"
