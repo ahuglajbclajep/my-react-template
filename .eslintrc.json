@@ -1,8 +1,8 @@
 {
   "parser": "@typescript-eslint/parser",
-  // see https://github.com/typescript-eslint/typescript-eslint/tree/v4.3.0/packages/parser#parseroptionsproject
+  // see https://github.com/typescript-eslint/typescript-eslint/tree/v4.22.0/packages/parser#parseroptionsproject
   "parserOptions": { "project": "./tsconfig.json" },
-  "env": { "browser": true, "es6": true, "worker": true }, // for allowJs
+  "env": { "browser": true, "es2021": true, "worker": true }, // for allowJs
   "settings": { "react": { "version": "detect" } },
   "plugins": ["@typescript-eslint"],
   "extends": [
@@ -18,7 +18,6 @@
     "react/react-in-jsx-scope": "off"
   },
   "overrides": [
-    // see https://github.com/typescript-eslint/typescript-eslint/blob/v4.3.0/packages/eslint-plugin/docs/rules/explicit-module-boundary-types.md#configuring-in-a-mixed-jsts-codebase
     {
       "files": ["*.js", "*.jsx"],
       "rules": { "@typescript-eslint/explicit-module-boundary-types": "off" }

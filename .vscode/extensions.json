@@ -2,7 +2,6 @@
 {
   "recommendations": [
     "dbaeumer.vscode-eslint",
-    // see https://github.com/prettier/prettier-vscode/issues/1290
     "esbenp.prettier-vscode",
     "stylelint.vscode-stylelint"
   ]

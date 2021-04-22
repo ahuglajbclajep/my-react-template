@@ -1,6 +1,12 @@
 {
+  /* editor */
+  "files.exclude": {
+    "**/node_modules": true
+  },
+
   /* format */
   "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.eol": "\n",
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
@@ -12,9 +18,8 @@
     "source.fixAll.stylelint": true,
     "source.fixAll.eslint": true
   },
-  // see https://github.com/prettier/prettier-vscode/issues/1598
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
 
   /* language specific */
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "stylelint.configOverrides": { "ignoreFiles": ["dist"] }
 }

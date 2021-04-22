@@ -1,5 +1,4 @@
 // `.eslintrc.json` allows comments, but `.stylelintrc.json` does not
-// see https://github.com/stylelint/stylelint/issues/4521
 module.exports = {
   extends: [
     "stylelint-config-standard",
@@ -7,10 +6,8 @@ module.exports = {
     "stylelint-config-prettier",
   ],
   rules: {
-    // `stylelint-disable` comments do not work in JSX, so set them in here instead
+    // see https://github.com/stylelint/stylelint/issues/5185
     "function-name-case": ["lower", { ignoreFunctions: [] }],
     "value-keyword-case": ["lower", { ignoreKeywords: [] }],
   },
-  // for vscode-stylelint
-  ignoreFiles: ["node_modules/**", "dist"],
 };
