@@ -1,0 +1,21 @@
+// https://code.visualstudio.com/docs/getstarted/settings#_default-settings
+{
+  /* Formatting */
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.eol": "\n",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+
+  /* Completion */
+  "editor.linkedEditing": true,
+
+  /* Language specific */
+  "typescript.tsdk": "node_modules/typescript/lib"
+
+  /* Extension specific */
+}
