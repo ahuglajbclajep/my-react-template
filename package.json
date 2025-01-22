@@ -2,11 +2,11 @@
   "name": "my-react-template",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint:type": "tsc"
   },
   "dependencies": {
     "react": "^18.3.1",
