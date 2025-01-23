@@ -6,7 +6,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "lint:type": "tsc"
+    "lint:type": "tsc",
+    "lint:format": "prettier . -c --cache"
   },
   "dependencies": {
     "react": "^19.0.0",
@@ -22,5 +23,12 @@
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.3",
     "vite": "^6.0.11"
-  }
+  },
+  "postcss": {
+    "plugins": {
+      "tailwindcss": {},
+      "autoprefixer": {}
+    }
+  },
+  "prettier": {}
 }
