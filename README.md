@@ -3,8 +3,11 @@
 A simple React and TypeScript template for VS Code.
 
 ```sh
-$ npm i
-$ code . & npm run dev
+$ git clone -b template git@github.com:ahuglajbclajep/my-react-template.git
+$ npm i; npm run dev
+
+$ git branch -m main
+$ git remote set-url origin git@github.com:OWNER/REPOSITORY.git
 ```
 
 ## Additional Configuration
