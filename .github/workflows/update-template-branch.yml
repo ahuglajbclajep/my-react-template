@@ -1,0 +1,18 @@
+on:
+  push:
+    branches:
+      - "main"
+jobs:
+  update-template-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "sha_short=$(git rev-parse --short @)" >> $GITHUB_ENV
+      - run: git checkout --orphan template
+      - run: rm -rf .github/
+      - run: |
+          git config user.name ahuglajbclajep
+          git config user.email ahuglajbclajep@gmail.com
+      - run: |
+          git commit -am "initial commit $sha_short"
+          git push -f origin template
