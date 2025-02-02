@@ -14,5 +14,5 @@ jobs:
           git config user.name ahuglajbclajep
           git config user.email ahuglajbclajep@gmail.com
       - run: |
-          git commit -am "initial commit $sha_short"
+          git commit -am "initial commit" -m "from ahuglajbclajep/my-react-template@$sha_short"
           git push -f origin template
