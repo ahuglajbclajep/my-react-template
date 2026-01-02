@@ -18,9 +18,4 @@
   "typescript.tsdk": "node_modules/typescript/lib",
 
   /* Extension specific */
-  // SEE: https://github.com/tailwindlabs/tailwindcss/discussions/7554
-  "tailwindCSS.experimental.classRegex": [
-    // e.g. const fooStyle = "bar";
-    "Style\\s*=\\s*['\"`]([^'\"`]*)['\"`];"
-  ]
 }

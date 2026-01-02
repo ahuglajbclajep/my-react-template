@@ -30,12 +30,8 @@ $ npm i -D prettier-plugin-tailwindcss
 
 ```diff
 {
-  "tailwindCSS.experimental.classRegex": [
--   // e.g. const fooStyle = "bar";
--   "Style\\s*=\\s*['\"`]([^'\"`]*)['\"`];"
-+   // e.g. const fooStyle = clsx("bar baz", cond ? "qux" : "quux");
-+   ["Style\\s*=\\s*clsx\\(([^\\)]*)\\);", "['\"`]([^'\"`]*)['\"`]"]
-  ]
+  /* Extension specific */
++ "tailwindCSS.classFunctions": ["clsx"]
 }
 ```
 
