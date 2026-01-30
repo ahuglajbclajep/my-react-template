@@ -8,6 +8,7 @@ $ npm i; npm run dev
 
 $ git branch -m main
 $ git remote set-url origin git@github.com:OWNER/REPOSITORY.git
+$ git branch --set-upstream-to=origin/main
 ```
 
 ## Additional Configuration
