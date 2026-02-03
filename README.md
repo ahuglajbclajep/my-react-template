@@ -75,10 +75,14 @@ $ npm i -D gh-pages
 {
   "scripts": {
     "preview": "vite preview",
-+   "deploy": "npm run build && gh-pages -d dist",
++   "deploy": "npm run build && gh-pages -d dist -v '.*' -f",
     "lint:type": "tsc",
   }
 }
 ```
 
 </details>
+
+# License
+
+MIT
